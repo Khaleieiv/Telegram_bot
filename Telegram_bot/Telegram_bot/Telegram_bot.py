@@ -53,9 +53,11 @@ def lalala(message):
              else:
                  q = generator_promocode()
                  a = "1"
+                 z = random.randrange(5, 10)
                  mess[message.from_user.id] = qty_mess(mess[message.from_user.id])
-                 bot.send_message(message.chat.id, q)                                                       
-                 cur.execute("INSERT INTO `promocode`(`value`, `active`) VALUES (%s, %s)", (q,a))
+                 bot.send_message(message.chat.id, q)     
+                 bot.send_message(message.chat.id, 'Скидка этого промокода: ' + str(z) + '%')  
+                 cur.execute("INSERT INTO `promocode`(`value`, `active`, `discount_percent`) VALUES (%s, %s, %s)", (q, a, z))
                  db.commit()
                  for result in cur.fetchall():
                     bot.sendMessage(chat_id, result [0])
